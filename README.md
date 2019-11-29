@@ -49,7 +49,7 @@ RJustLen(s string, l int)
 
 ## Example Usage
 
-Please look at the example.go file.
+Please look at the example code.
 
 ### main.go
 ```go
@@ -62,6 +62,9 @@ import (
 )
 
 func main() {
+	fmt.Println(pad.Right("Hello", "!", 20))
+	fmt.Println(pad.Left("Exit now", "→", 20))
+	fmt.Println("-----")
 	fmt.Println(pad.Left("D", "a", 4))
 	fmt.Println(pad.Right("D", "a", 4))
 	fmt.Println(pad.ZFill("D", 4))
@@ -90,6 +93,9 @@ func main() {
 
 ### output
 ```
+Hello!!!!!!!!!!!!!!!!!!!!
+→→→→→→→→→→→→→→→→→→→→Exit now
+-----
 aaaaD
 Daaaa
 0000D
