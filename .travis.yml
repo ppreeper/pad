@@ -14,9 +14,6 @@ os:
   - linux
   - osx
 
-exclude:
-  - example/*
-
 before_install:
   - go get golang.org/x/tools/cmd/cover
   - go get github.com/mattn/goveralls
