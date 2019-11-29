@@ -14,7 +14,7 @@ os:
   - linux
   - osx
 
-ignore:
+exclude:
   - example/*
 
 before_install:
