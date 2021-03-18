@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ppreeper/pad.svg?branch=master)](https://travis-ci.org/ppreeper/pad)
+[![Build Status](https://github.com/ppreeper/pad/actions/workflows/go.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/ppreeper/pad/badge.svg?branch=master)](https://coveralls.io/github/ppreeper/pad?branch=master)
 
 # pad
