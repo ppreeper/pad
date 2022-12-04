@@ -40,6 +40,36 @@ func TestLeft(t *testing.T) {
 	}
 }
 
+// TruncLeft
+var TruncLeftPatterns = []struct {
+	s        string
+	c        int
+	expected string
+}{
+	{"A", 1, "A"},
+	{"A", -1, ""},
+	{"A", 0, ""},
+	{"A", 2, "A"},
+	{"AB", 1, "A"},
+	{"AB", 2, "AB"},
+	{"AB", 3, "AB"},
+	{"ABC", 1, "A"},
+	{"ABC", 2, "AB"},
+	{"ABC", 3, "ABC"},
+	{"ABC", 4, "ABC"},
+}
+
+func TestTruncLeft(t *testing.T) {
+	for _, tc := range TruncLeftPatterns {
+		tc := tc
+		t.Run(tc.s, func(t *testing.T) {
+			t.Parallel()
+			res := TruncLeft(tc.s, tc.c)
+			assert.True(t, assert.ObjectsAreEqualValues(tc.expected, res))
+		})
+	}
+}
+
 // LeftLen
 
 var LeftLenPatternTests = []struct {
@@ -169,6 +199,36 @@ func TestRight(t *testing.T) {
 		t.Run(tc.s, func(t *testing.T) {
 			t.Parallel()
 			res := Right(tc.s, tc.p, tc.c)
+			assert.True(t, assert.ObjectsAreEqualValues(tc.expected, res))
+		})
+	}
+}
+
+// TruncRight
+var TruncRightPatterns = []struct {
+	s        string
+	c        int
+	expected string
+}{
+	{"A", 1, "A"},
+	{"A", -1, ""},
+	{"A", 0, ""},
+	{"A", 2, "A"},
+	{"AB", 1, "B"},
+	{"AB", 2, "AB"},
+	{"AB", 3, "AB"},
+	{"ABC", 1, "C"},
+	{"ABC", 2, "BC"},
+	{"ABC", 3, "ABC"},
+	{"ABC", 4, "ABC"},
+}
+
+func TestTruncRight(t *testing.T) {
+	for _, tc := range TruncRightPatterns {
+		tc := tc
+		t.Run(tc.s, func(t *testing.T) {
+			t.Parallel()
+			res := TruncRight(tc.s, tc.c)
 			assert.True(t, assert.ObjectsAreEqualValues(tc.expected, res))
 		})
 	}
@@ -364,6 +424,13 @@ func BenchmarkLeft_D_a_200(b *testing.B) {
 	}
 }
 
+// TruncLeft
+func BenchmarkTruncLeft_DDDD_2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		TruncLeft("DDDD", 2)
+	}
+}
+
 // LeftLen
 func BenchmarkLeftLen_D_utf8_4(b *testing.B) {
 	for i := 0; i < b.N; i++ {
@@ -440,6 +507,13 @@ func BenchmarkRight_D_a_4(b *testing.B) {
 func BenchmarkRight_D_a_200(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		Right("D", "a", 200)
+	}
+}
+
+// TruncRight
+func BenchmarkTruncRight_DDDD_2(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		TruncRight("DDDD", 2)
 	}
 }
 

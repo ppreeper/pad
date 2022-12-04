@@ -2,42 +2,60 @@ package pad
 
 // Left pads string on left side with pattern p, count c times
 func Left(s string, p string, c int) string {
-	if c <= 0 {
-		return s
-	}
-	if len(p) < 1 {
+	if c <= 0 || len(p) < 1 {
 		return s
 	}
 
-	ret := make([]byte, len(p)*c+len(s))
-	b := ret[:len(p)*c]
-	bp := copy(b, p)
-	for bp < len(b) {
-		copy(b[bp:], b[:bp])
+	retString := make([]byte, len(p)*c+len(s))
+	pad := retString[:len(p)*c]
+	bp := copy(pad, p)
+	for bp < len(pad) {
+		copy(pad[bp:], pad[:bp])
 		bp *= 2
 	}
-	copy(ret[len(b):], s)
-	return string(ret)
+	copy(retString[len(pad):], s)
+	return string(retString)
 }
 
 // Right pads string on right side with pattern p, count c times
 func Right(s string, p string, c int) string {
-	if c <= 0 {
+	if c <= 0 || len(p) < 1 {
 		return s
 	}
-	if len(p) < 1 {
-		return s
-	}
-	ret := make([]byte, len(p)*c+len(s))
 
-	copy(ret, s)
-	b := ret[len(s):]
+	retString := make([]byte, len(p)*c+len(s))
+	copy(retString, s)
+	b := retString[len(s):]
 	bp := copy(b, p)
 	for bp < len(b) {
 		copy(b[bp:], b[:bp])
 		bp *= 2
 	}
-	return string(ret)
+	return string(retString)
+}
+
+// TruncLeft returns the first character or characters of a string.
+func TruncLeft(s string, l int) string {
+	if l <= 0 {
+		return ""
+	}
+	if l > len(s) {
+		return s
+	}
+	ret := []byte(s)
+	return string(ret[:l])
+}
+
+// TruncRight returns the last character or characters of a string.
+func TruncRight(s string, l int) string {
+	if l <= 0 {
+		return ""
+	}
+	if l > len(s) {
+		return s
+	}
+	ret := []byte(s)
+	return string(ret[len(s)-l:])
 }
 
 // LeftLen pads string on left side with pattern p, returns string of length l
@@ -45,16 +63,16 @@ func LeftLen(s string, p string, l int) string {
 	if l <= 0 {
 		return ""
 	}
-	ret := make([]byte, len(p)*l+len(s))
 
-	b := ret[:len(p)*l]
-	bp := copy(b, p)
-	for bp < len(b) {
-		copy(b[bp:], b[:bp])
+	retString := make([]byte, len(p)*l+len(s))
+	pad := retString[:len(p)*l]
+	bp := copy(pad, p)
+	for bp < len(pad) {
+		copy(pad[bp:], pad[:bp])
 		bp *= 2
 	}
-	copy(ret[len(b):], s)
-	return string(ret[len(ret)-l:])
+	copy(retString[len(pad):], s)
+	return string(retString[len(retString)-l:])
 }
 
 // RightLen pads string on left side with p, returns string of length l
@@ -62,16 +80,16 @@ func RightLen(s string, p string, l int) string {
 	if l <= 0 {
 		return ""
 	}
-	ret := make([]byte, len(p)*l+len(s))
 
-	copy(ret, s)
-	b := ret[len(s):]
-	bp := copy(b, p)
-	for bp < len(b) {
-		copy(b[bp:], b[:bp])
+	retString := make([]byte, len(p)*l+len(s))
+	copy(retString, s)
+	pad := retString[len(s):]
+	bp := copy(pad, p)
+	for bp < len(pad) {
+		copy(pad[bp:], pad[:bp])
 		bp *= 2
 	}
-	return string(ret[:l])
+	return string(retString[:l])
 }
 
 // ZFill fills string with 0 on left c time
